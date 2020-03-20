@@ -8,16 +8,11 @@
         $port = 3306;
 
         $link = mysqli_connect($host, $user, $password, $db);
-            //if(empty($_POST[recherche]))
+
         if (!$link) {
             die('Erreur de connexion');
-        } //else {echo "success ";}
-        //echo "la ";
+        } 
 
-        /*$test = $_POST['title'];
-        echo $test;*/
-
-        //$variable=GET$_["track"];
         $requete = "SELECT * FROM information_gps WHERE title = \"".$title."\"";
 
         $result = mysqli_query($link, $requete);
@@ -29,7 +24,5 @@
             }
         }
         return NULL;
-        //$text=$_GET['title'];
-        //echo $text
     }
 ?>

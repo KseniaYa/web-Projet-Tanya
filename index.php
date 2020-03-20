@@ -20,13 +20,13 @@
       <fieldset>
         <div class="flex-container">
           <div>
-            <select id="track" class="custom-button leaflet-control-zoom leaflet-control">
-              <option value="Track 1">Tour de la Dent d'Oche</option>
-              <option value="Track 2">Brèche S Le Pain de Sucre</option>
+            <select id="track" class="custom-button select-select custom-arrow">
+              <option value="Track 1" class="select-option">Tour de la Dent d'Oche</option>
+              <option value="Track 2" class="select-option">Brèche S Le Pain de Sucre</option>
             </select>
           </div>
           <div>
-            <input id="submit" class="custom-button leaflet-control-zoom leaflet-control" type="submit" name="ok" value="C'est parti !" onclick=openPopup()>
+            <input id="submit" class="custom-button select-select" type="submit" name="ok" value="C'est parti !" onclick=openPopup()>
           </div>
         </div>
       </fieldset>
@@ -36,8 +36,6 @@
 
 <body>    
     <div id="mapid"></div>
-    <!-- <div id="resultats"></div> -->
-    <!-- <canvas id="resultats" width="400" height="400"></canvas> -->
      <div id="hover-popup-window" class="hover-popup-window">
         <span class="helper"></span>
         <div>

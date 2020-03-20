@@ -9,24 +9,22 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var button = document.getElementById("submit");
 var resultats = document.getElementById("resultats");
 var elForm = document.getElementById('track');
-var recherche = elForm.value;
+var recherche = null;
+var polyline = null;
 
 button.addEventListener('click', function(event){
     event.preventDefault();
 
-    recherche = elForm.value;
+    if (recherche === elForm.value & recherche != null) {
+    	mymap.fitBounds(polyline.getBounds(), {paddingBottomRight: [350,0]});
+    	return;
+    }
 
-	//document.location.href = "#recherche=" + recherche; 
-/*	$.ajax({
-	          type:"GET",
-	          url : "connectbd.php?recherche=",
-	          data:{'recherche':recherche}
-	});*/
-    
-    var polyline = L.polyline([[]]);
+    recherche = elForm.value;
+  
+    polyline = L.polyline([[]]);
     polyline.addTo(mymap);
     createLine(polyline);
-
   
 });
 
@@ -56,9 +54,8 @@ function createLine(polyline) {
 			    
 		      }
 		    )
-		    //polyline.addTo(mymap);
-		    mymap.fitBounds(polyline.getBounds());
-		    /*resultats.innerHTML = */
+
+		    mymap.fitBounds(polyline.getBounds(), {paddingBottomRight: [350,0]});
 		    
 		    drawProfile(altitudes, line); 
     });
@@ -75,20 +72,38 @@ function drawProfile(array, list){
 	}
 
 	window.chart = new Chart(ctx, {
-		// type de graphique
 		type: 'line',
-		// les données
 		data: {
 			labels: range(array.length),
 			datasets: [{
-				label: 'Rando',
-				backgroundColor: 'rgb(255, 99, 132)',
-				borderColor: 'rgb(255, 99, 132)',
-				data: array
+				label: elForm.selectedOptions[0].innerText,
+				backgroundColor: 'rgba(235, 235, 235, 0.6)',
+				borderColor: 'rgb(235, 235, 235)',
+				fontColor: '#fff',
+				data: array,
+				pointRadius: 1,
+				pointBorderWidth: 0
 			}]
 		},
-		// Les options du graphique
 		options: {
+
+			scales: {
+	            yAxes: [{
+	                ticks: {
+	                    fontColor: '#fff'
+	                },
+	            }],
+	          	xAxes: [{
+	                ticks: {
+	                    fontColor: '#fff'
+	                },
+	            }]
+	        },
+			legend: {
+				labels: {
+					fontColor: '#fff'
+				}
+			},
 			hover: {
 				mode: 'index',
 				intersect: false },
@@ -96,19 +111,12 @@ function drawProfile(array, list){
 				mode: 'index',
 				intersect: false },
 			onHover: (evt, array) => {
-				//console.log(evt);
 				if (typeof window.mark != "undefined" || window.mark != null){
-					/*console.log('ttt');*/
 					mymap.removeLayer(window.mark);
 				}
-				window.mark = L.marker(list[array[0]._index]).addTo(mymap);
-			/* lors du survol
-			evt = l’evenement
-			array = un tableau d’objet survolé 
-			(un seul objet dans notre cas)
-			array[0]._index = indice de l’objet 
-			survolé (sa position dans le tableau des
-			points)*/
+				if (array[0] != undefined){
+					window.mark = L.marker(list[array[0]._index]).addTo(mymap);
+				}
 			}
 		}
 	});
