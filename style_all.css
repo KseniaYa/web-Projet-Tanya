@@ -24,7 +24,6 @@ header {
     font-family: 'Amatic SC', cursive;
     box-shadow: 0 1px 10px 0 rgb(20,20,20);
     z-index: 11;
-    border-radius: 6px;
     width: 25em;
     margin-left: 1em;
     color: rgb(235, 235, 235);
@@ -35,6 +34,7 @@ header > div {
     padding: 0 20px;
 }
 
+
 .custom-button {
     text-align: center;
     text-decoration: none;
@@ -42,8 +42,6 @@ header > div {
     cursor: pointer;
     box-shadow: 0 1px 3px 0 rgb(100, 100, 100);
 }
-
-
 
 
 #mapid { 
@@ -63,8 +61,6 @@ fieldset {
 canvas {
     animation: none !important;
     background-color: rgba(101, 102, 108, 0.85);
-    border-radius: 6px;
-
 }
 
 .hover-popup-window{
@@ -75,6 +71,31 @@ canvas {
     right: 1em;
     text-align:center;
     z-index:10;
+}
+
+@media (max-width: 720px) {
+    header {
+        top: 0;
+        right: 0;
+        width:80%;
+        font-size: 0.8em;
+    }
+
+    .hover-popup-window{
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        right: 0;
+        text-align:center;
+        z-index:10;
+    }
+    .hover-popup-window > div {
+        background-color: rgba(101, 102, 108, 0);
+        box-shadow: 0 1px 10px 0 rgb(20,20,20);
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+    }
 }
 
 .hover-popup-window .helper{
@@ -90,7 +111,6 @@ canvas {
     vertical-align: middle;
     /* height: 100%; */
     position: relative;
-    border-radius: 6px;
 }
 
 .popupCloseButton {
